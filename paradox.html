@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style>
+        #achilles {
+            position: relative;
+        }
+
+        #tortoise {
+            position: relative;
+
+        }
+    </style>
+</head>
+
+<body>
+    <p><img id="achilles" src="./img/achilles.png"></p>
+    <p><img id="tortoise" src="./img/tortoise.png"></p>
+    <p><button onclick="move()">Start</button></p>
+
+
+    <script>
+
+        let tortoisePosition = 100;
+        let achillesPosition = 0;
+
+        const move = async () => {
+            for (let i = 0; i < 10; i++) {
+                await moveTortoise()
+                await moveAchilles()
+            }
+        };
+
+
+        const moveTortoise = async () => {
+            const timer = (ms) => new Promise((res) => setTimeout(res, ms));
+            let tortoise = document.getElementById("tortoise");
+            for (let i = 0; i < 100; i++) {
+                await timer(100);
+                tortoisePosition += 3
+                tortoise.style.left = (tortoisePosition) + 'px';
+            }
+        }
+
+
+        const moveAchilles = async () => {
+            const timer = (ms) => new Promise((res) => setTimeout(res, ms));
+            let achilles = document.getElementById("achilles");
+            while (achillesPosition <= tortoisePosition) {
+                await timer(10);
+                achillesPosition += 3
+                achilles.style.left = (achillesPosition) + 'px';
+            }
+        }
+
+    </script>
+
+
+</body>
+
+</html>
